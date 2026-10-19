@@ -104,13 +104,13 @@ function cove_ai_dsml_valor( $valor, $marca_string ) {
  */
 function cove_ai_dsml_llamadas( $texto ) {
 
-	$B = COVE_AI_DSML_BARRAS;
+	$barras = COVE_AI_DSML_BARRAS;
 
 	if ( ! preg_match_all(
 		// Se exige la etiqueta de cierre: un bloque a medias NO se ejecuta.
 		// Es preferible pedirle al cliente que reformule antes que ejecutar una
 		// herramienta con argumentos inventados a partir de una salida truncada.
-		'#<\s*' . $B . '\s*invoke\b([^>]*?)>(.*?)</\s*' . $B . '\s*invoke\s*>#isu',
+		'#<\s*' . $barras . '\s*invoke\b([^>]*?)>(.*?)</\s*' . $barras . '\s*invoke\s*>#isu',
 		(string) $texto,
 		$bloques,
 		PREG_SET_ORDER
@@ -133,7 +133,7 @@ function cove_ai_dsml_llamadas( $texto ) {
 
 		// Forma A: parámetros con cuerpo.
 		if ( preg_match_all(
-			'#<\s*' . $B . '\s*parameter\b([^>]*?)>(.*?)</\s*' . $B . '\s*parameter\s*>#isu',
+			'#<\s*' . $barras . '\s*parameter\b([^>]*?)>(.*?)</\s*' . $barras . '\s*parameter\s*>#isu',
 			$cuerpo,
 			$params,
 			PREG_SET_ORDER
@@ -149,7 +149,7 @@ function cove_ai_dsml_llamadas( $texto ) {
 
 		// Forma B: etiquetas autocerradas, con el valor en el atributo string.
 		if ( preg_match_all(
-			'#<\s*' . $B . '\s*(?:parameter|invoke)\b([^>]*?)/>#isu',
+			'#<\s*' . $barras . '\s*(?:parameter|invoke)\b([^>]*?)/>#isu',
 			$cuerpo,
 			$autos,
 			PREG_SET_ORDER
@@ -230,19 +230,19 @@ function cove_ai_dsml_limpiar( $texto ) {
 		return $texto;
 	}
 
-	$B = COVE_AI_DSML_BARRAS;
+	$barras = COVE_AI_DSML_BARRAS;
 
 	$limpio = preg_replace(
 		array(
 			// Envoltorio abierto: se descarta también lo que venga detrás,
 			// porque el resto del turno era la petición de herramientas.
-			'#<\s*' . $B . '\s*(?:tool_calls|calls|toolcalls)\s*>.*$#isu',
-			'#</\s*' . $B . '\s*(?:tool_calls|calls|toolcalls)\s*>#iu',
-			'#<\s*' . $B . '\s*invoke\b[^>]*?(?:/>|>.*?</\s*' . $B . '\s*invoke\s*>)#isu',
-			'#<\s*' . $B . '\s*parameter\b[^>]*?>.*?</\s*' . $B . '\s*parameter\s*>#isu',
-			'#<\s*' . $B . '\s*parameter\b[^>]*?/>#iu',
+			'#<\s*' . $barras . '\s*(?:tool_calls|calls|toolcalls)\s*>.*$#isu',
+			'#</\s*' . $barras . '\s*(?:tool_calls|calls|toolcalls)\s*>#iu',
+			'#<\s*' . $barras . '\s*invoke\b[^>]*?(?:/>|>.*?</\s*' . $barras . '\s*invoke\s*>)#isu',
+			'#<\s*' . $barras . '\s*parameter\b[^>]*?>.*?</\s*' . $barras . '\s*parameter\s*>#isu',
+			'#<\s*' . $barras . '\s*parameter\b[^>]*?/>#iu',
 			// Residuo: cualquier etiqueta DSML suelta, con o sin atributos.
-			'#<\s*/?\s*' . $B . '\s*[a-zA-Z_]*[^>]*>#iu',
+			'#<\s*/?\s*' . $barras . '\s*[a-zA-Z_]*[^>]*>#iu',
 		),
 		'',
 		$texto

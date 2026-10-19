@@ -91,6 +91,46 @@ function cove_ai_widget_config() {
 }
 
 /**
+ * Encola el bundle del componente.
+ *
+ * ANTES: el <script src> se imprimía a mano desde cove_ai_print_widget(), que
+ * es la violación WordPress.WP.EnqueuedResources.NonEnqueuedScript. Encolarlo
+ * permite que WordPress lo combine, lo versione y lo mueva al pie cuando toca.
+ */
+function cove_ai_enqueue_assets() {
+
+	if ( is_admin() || ! defined( 'WPMU_PLUGIN_URL' ) ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'cove-ai-deepchat',
+		WPMU_PLUGIN_URL . '/cove-ai-chat/assets/deepChat.min.js',
+		array(),
+		COVE_AI_VERSION,
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
+}
+add_action( 'wp_enqueue_scripts', 'cove_ai_enqueue_assets' );
+
+/**
+ * El componente se distribuye como módulo ES y wp_enqueue_script no tiene un
+ * argumento para eso, así que se añade el atributo al tag encolado.
+ */
+function cove_ai_script_module_tag( $tag, $handle ) {
+
+	if ( 'cove-ai-deepchat' === $handle ) {
+		return str_replace( ' src', ' type="module" src', $tag );
+	}
+
+	return $tag;
+}
+add_filter( 'script_loader_tag', 'cove_ai_script_module_tag', 10, 2 );
+
+/**
  * Imprime el widget en el pie de página.
  */
 function cove_ai_print_widget() {
@@ -99,7 +139,6 @@ function cove_ai_print_widget() {
 		return;
 	}
 
-	$bundle = WPMU_PLUGIN_URL . '/cove-ai-chat/assets/deepChat.min.js';
 	// JSON_HEX_TAG evita que un "</script>" dentro de los datos (una política
 	// de la tienda, por ejemplo) rompa el bloque de configuración.
 	$config = wp_json_encode( cove_ai_widget_config(), JSON_HEX_TAG );
@@ -191,7 +230,6 @@ JS;
 		. '<deep-chat id="cove-ai-chat"></deep-chat>'
 		. '<div id="cove-ai-foot">Respuestas generadas por IA · pueden contener errores</div>'
 		. '</div>'
-		. '<script type="module" src="' . esc_url( $bundle . '?ver=' . COVE_AI_VERSION ) . '"></script>'
 		. '<script>' . $js . '</script>';
 
 	echo $html; // phpcs:ignore WordPress.Security.EscapeOutput -- ya escapado por partes arriba.
