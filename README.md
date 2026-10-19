@@ -65,8 +65,7 @@ WordPress solo carga automáticamente los `.php` que están **directamente** en
 `mu-plugins/`, no los de subcarpetas. De ahí la pareja cargador + carpeta.
 
 ```bash
-# 1. Cargador + módulos
-cd "C:/Users/jjsot/Documents/Hermes generated/cove-ai-chat"
+# 1. Cargador + módulos (desde la raíz de este repositorio)
 mkdir -p "C:/laragon/www/COVE/wp-content/mu-plugins"
 cp src/cove-ai-chat.php "C:/laragon/www/COVE/wp-content/mu-plugins/"
 cp -r src/cove-ai-chat "C:/laragon/www/COVE/wp-content/mu-plugins/"

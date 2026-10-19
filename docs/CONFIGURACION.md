@@ -199,9 +199,9 @@ La herramienta `mis_pedidos` solo funciona con **clientes con sesión iniciada**
 ## 11. Guardar una copia fuera de WordPress
 
 `wp-content/mu-plugins/` es lo primero que se pierde al reinstalar WordPress o
-al mover el sitio. Este proyecto ya vive en
-`C:\Users\jjsot\Documents\Hermes generated\cove-ai-chat`; mantenlo ahí como
-fuente de verdad y copia **desde** ahí **hacia** `mu-plugins`, nunca al revés.
+al mover el sitio. Este proyecto vive en la carpeta de este repositorio; tenla
+como fuente de verdad y copia **desde** ella **hacia** `mu-plugins`, nunca al
+revés.
 
 ---
 

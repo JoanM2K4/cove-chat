@@ -40,7 +40,7 @@ personalizado sería una página de error del CDN, no el componente.
 ## Cómo actualizarlo
 
 ```bash
-cd "C:/Users/jjsot/Documents/Hermes generated/cove-ai-chat/assets"
+cd assets
 curl -L -o deepChat.min.js "https://cdn.jsdelivr.net/npm/deep-chat@<VERSION>/dist/deepChat.min.js"
 
 # 1. Que siga siendo el componente
