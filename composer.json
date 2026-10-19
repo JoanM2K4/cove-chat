@@ -1,0 +1,21 @@
+{
+    "name": "joanm2k4/cove-chat",
+    "description": "Agente de IA con function calling sobre una tienda WooCommerce (mu-plugin de WordPress).",
+    "type": "wordpress-muplugin",
+    "license": "proprietary",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.13",
+        "wp-coding-standards/wpcs": "^3.4",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.1",
+        "automattic/vipwpcs": "^3.0",
+        "phpstan/phpstan": "^2.1",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "php-stubs/woocommerce-stubs": "^11.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    }
+}

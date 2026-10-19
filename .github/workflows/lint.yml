@@ -1,0 +1,44 @@
+name: Linting
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  phpcs:
+    name: PHPCS + WordPress Coding Standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar PHP y Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+          coverage: none
+
+      - name: Instalar dependencias de desarrollo
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      # Falla el job si hay errores de WordPress-Extra.
+      # Las advertencias no fallan el job por defecto.
+      - name: Ejecutar PHPCS
+        run: vendor/bin/phpcs
+
+      # Se ejecuta aunque el paso anterior falle, para tener siempre evidencia.
+      - name: Generar reporte legible
+        if: always()
+        run: vendor/bin/phpcs --report=checkstyle --report-file=reporte-phpcs.xml || true
+
+      - name: Publicar el reporte como artefacto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-phpcs
+          path: reporte-phpcs.xml
+          retention-days: 30

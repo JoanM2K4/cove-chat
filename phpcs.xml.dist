@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ruleset name="Cove AI Chat">
+	<description>WordPress Coding Standards aplicado al mu-plugin del agente de IA.</description>
+
+	<!-- Solo el codigo propio. assets/ es un bundle de terceros (DeepChat 2.5.1). -->
+	<file>src</file>
+	<exclude-pattern>assets/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg name="report-width" value="200"/>
+
+	<!--
+		WordPress-Extra = WordPress-Core + buenas practicas, e incluye los sniff
+		de seguridad (WordPress.Security.* y WordPress.DB.*), que son los que
+		interesan para la auditoria.
+
+		Sin exclusiones a proposito: las 3 advertencias de error_log() se
+		documentan como excepcion aceptada en el informe, pero se dejan visibles
+		aqui para que las cifras antes/despues sean comparables.
+	-->
+	<rule ref="WordPress-Extra"/>
+</ruleset>

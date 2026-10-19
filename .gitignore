@@ -1,0 +1,4 @@
+# Dependencias y artefactos que no deben versionarse
+/vendor/
+/node_modules/
+/reporte-phpcs.xml
