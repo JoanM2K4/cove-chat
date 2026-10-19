@@ -36,9 +36,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 function cove_ai_widget_config() {
 
 	$connect = array(
-		'url'         => rest_url( COVE_AI_REST_NAMESPACE . '/chat' ),
-		'method'      => 'POST',
-		'credentials' => 'same-origin',
+		'url'                 => rest_url( COVE_AI_REST_NAMESPACE . '/chat' ),
+		'method'              => 'POST',
+		'credentials'         => 'same-origin',
 		// Propiedades extra que se añaden al cuerpo de cada petición.
 		// session_id permite al servidor recordar la última búsqueda y
 		// responder bien a "y las demás que haya".
@@ -59,7 +59,7 @@ function cove_ai_widget_config() {
 		// navegador y reenvía solo los últimos N. Los resultados de las
 		// herramientas NO viajan aquí: se consumen en el servidor.
 		'requestBodyLimits'    => array(
-			'maxMessages'               => COVE_AI_HISTORY_KEEP,
+			'maxMessages'                => COVE_AI_HISTORY_KEEP,
 			'totalMessagesMaxCharLength' => 6000,
 		),
 		'displayLoadingBubble' => true,

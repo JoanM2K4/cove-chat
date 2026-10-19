@@ -38,23 +38,23 @@ function cove_ai_tools() {
 				'parameters'  => array(
 					'type'       => 'object',
 					'properties' => array(
-						'termino'      => array(
+						'termino'       => array(
 							'type'        => 'string',
 							'description' => 'Texto libre a buscar en el nombre y contenido del producto. Ej: "mochila", "nevera", "beluga". No lo uses para colores, tallas ni capacidades: eso son atributos.',
 						),
-						'categoria'    => array(
+						'categoria'     => array(
 							'type'        => 'string',
 							'description' => 'Nombre o slug de una categoría del catálogo. Si no conoces las categorías reales, usa listar_categorias primero.',
 						),
-						'precio_min'   => array(
+						'precio_min'    => array(
 							'type'        => 'number',
 							'description' => 'Precio mínimo (en la moneda de la tienda). Se compara contra el rango real de precios del producto, variaciones incluidas.',
 						),
-						'precio_max'   => array(
+						'precio_max'    => array(
 							'type'        => 'number',
 							'description' => 'Precio máximo (en la moneda de la tienda). Ej: el cliente dice "de menos de 100".',
 						),
-						'atributos'    => array(
+						'atributos'     => array(
 							'type'        => 'array',
 							'description' => 'Filtros por atributo del producto (color, talla, capacidad, material...). Cada elemento es un par atributo/valor. Si repites el mismo atributo con valores distintos, se interpreta como "cualquiera de ellos" (azul O rojo). Atributos distintos se combinan con Y. Solo funcionan atributos globales: consulta listar_atributos si dudas de los valores válidos.',
 							'items'       => array(
@@ -76,20 +76,20 @@ function cove_ai_tools() {
 							'type'        => 'boolean',
 							'description' => 'Si es true, solo devuelve productos disponibles. Úsalo cuando el cliente pregunte por algo disponible o urgente.',
 						),
-						'en_oferta'    => array(
+						'en_oferta'     => array(
 							'type'        => 'boolean',
 							'description' => 'Si es true, solo devuelve productos REBAJADOS (con precio de oferta activo). Úsalo cuando el cliente pregunte por ofertas, rebajas, descuentos o "qué está en promoción".',
 						),
-						'orden'        => array(
+						'orden'         => array(
 							'type'        => 'string',
 							'enum'        => array( 'relevancia', 'novedad', 'precio_asc', 'precio_desc', 'nombre' ),
 							'description' => 'Orden de los resultados. "precio_asc" para "el más barato primero".',
 						),
-						'limite'       => array(
+						'limite'        => array(
 							'type'        => 'integer',
 							'description' => 'Cuántos productos devolver (1 a 8). Por defecto 5.',
 						),
-						'offset'       => array(
+						'offset'        => array(
 							'type'        => 'integer',
 							'description' => 'Desde qué posición empezar, para paginar. Normalmente usa siguiente_bloque en vez de esto.',
 						),

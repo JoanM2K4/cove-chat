@@ -298,8 +298,8 @@ function cove_ai_converse( array $messages, $session_id = '' ) {
 			return $respuesta;
 		}
 
-		$codigo    = (int) wp_remote_retrieve_response_code( $respuesta );
-		$crudo     = (string) wp_remote_retrieve_body( $respuesta );
+		$codigo       = (int) wp_remote_retrieve_response_code( $respuesta );
+		$crudo        = (string) wp_remote_retrieve_body( $respuesta );
 		$decodificado = json_decode( $crudo, true );
 
 		if ( 200 !== $codigo || ! is_array( $decodificado ) ) {
@@ -404,8 +404,8 @@ function cove_ai_linkify( $texto ) {
 	$protegido = preg_replace_callback(
 		'/\[[^\]]*\]\(\s*(https?:\/\/[^\s\)]+)\s*\)/i',
 		function ( $coincidencia ) use ( &$guardados ) {
-			$clave                = 'COVEAIENLACE' . count( $guardados ) . 'FIN';
-			$guardados[ $clave ]  = $coincidencia[0];
+			$clave               = 'COVEAIENLACE' . count( $guardados ) . 'FIN';
+			$guardados[ $clave ] = $coincidencia[0];
 			return $clave;
 		},
 		(string) $texto
@@ -420,8 +420,8 @@ function cove_ai_linkify( $texto ) {
 	$convertido = preg_replace_callback(
 		'~https?://[^\s<>()\[\]"\'`]+~i',
 		function ( $coincidencia ) {
-			$url    = rtrim( $coincidencia[0], '.,;:!?' );
-			$sobra  = substr( $coincidencia[0], strlen( $url ) );
+			$url   = rtrim( $coincidencia[0], '.,;:!?' );
+			$sobra = substr( $coincidencia[0], strlen( $url ) );
 			return '[' . $url . '](' . $url . ')' . $sobra;
 		},
 		$protegido

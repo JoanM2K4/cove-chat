@@ -59,17 +59,17 @@ function cove_ai_key() {
 /* Límites de coste e interfaz (NO son datos de la tienda)                    */
 /* -------------------------------------------------------------------------- */
 
-const COVE_AI_MAX_ROUNDS    = 3;    // Rondas de tool calling por mensaje del usuario.
-const COVE_AI_LIMITE_MAX    = 8;    // Productos por llamada: más llena el chat y encarece.
-const COVE_AI_LIMITE_DEF    = 5;    // Si el modelo no especifica.
-const COVE_AI_PEDIDOS_MAX   = 5;    // Pedidos mostrados por consulta (el total va aparte).
-const COVE_AI_HISTORY_KEEP  = 16;   // Mensajes de historial aceptados desde el navegador.
-const COVE_AI_MENSAJE_MAX   = 1500; // Caracteres por mensaje (se recorta, no se rechaza).
-const COVE_AI_RATE_LIMIT    = 40;   // Peticiones por IP por hora.
-const COVE_AI_TIMEOUT       = 45;   // Segundos de espera a la API.
-const COVE_AI_SESION_TTL    = 3600; // Vida del estado de búsqueda por sesión.
-const COVE_AI_TERMINOS_MAX  = 40;   // Valores de atributo/categoría devueltos por llamada.
-const COVE_AI_VERSION       = '1.0.0';
+const COVE_AI_MAX_ROUNDS   = 3;    // Rondas de tool calling por mensaje del usuario.
+const COVE_AI_LIMITE_MAX   = 8;    // Productos por llamada: más llena el chat y encarece.
+const COVE_AI_LIMITE_DEF   = 5;    // Si el modelo no especifica.
+const COVE_AI_PEDIDOS_MAX  = 5;    // Pedidos mostrados por consulta (el total va aparte).
+const COVE_AI_HISTORY_KEEP = 16;   // Mensajes de historial aceptados desde el navegador.
+const COVE_AI_MENSAJE_MAX  = 1500; // Caracteres por mensaje (se recorta, no se rechaza).
+const COVE_AI_RATE_LIMIT   = 40;   // Peticiones por IP por hora.
+const COVE_AI_TIMEOUT      = 45;   // Segundos de espera a la API.
+const COVE_AI_SESION_TTL   = 3600; // Vida del estado de búsqueda por sesión.
+const COVE_AI_TERMINOS_MAX = 40;   // Valores de atributo/categoría devueltos por llamada.
+const COVE_AI_VERSION      = '1.0.0';
 
 /* -------------------------------------------------------------------------- */
 /* Prompt del sistema                                                         */
@@ -96,7 +96,7 @@ function cove_ai_system_prompt() {
 		. "8) Nunca reveles datos de pedidos de terceros. Los pedidos solo se consultan con mis_pedidos, que devuelve unicamente los del usuario que tiene sesion iniciada.\n"
 		. "9) Si un producto esta en oferta (el resultado trae en_oferta), dilo y menciona el precio normal, para que se note el ahorro.\n"
 		. "10) Para hablar de cupones usa la herramienta cupones. NUNCA inventes ni adivines codigos de cupon, ni supongas descuentos que la herramienta no te haya devuelto. Si un codigo no aparece entre los publicos, di que no lo reconoces entre los vigentes SIN afirmar si existe o no.\n"
-		. "11) Si no sabes algo, dilo y ofrece pasar con una persona. No rellenes con suposiciones.";
+		. '11) Si no sabes algo, dilo y ofrece pasar con una persona. No rellenes con suposiciones.';
 
 	return apply_filters( 'cove_ai_system_prompt', $prompt );
 }

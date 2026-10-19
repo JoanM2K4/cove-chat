@@ -68,54 +68,54 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 return array(
 
-	'terminos' => "TÉRMINOS Y CONDICIONES\n\n"
+	'terminos'     => "TÉRMINOS Y CONDICIONES\n\n"
 		. "Este sitio web es operado por Cove Outdoor. En todo el sitio, los términos «nosotros», «nos» y «nuestro» se refieren a Cove Outdoor.\n"
 		. "Sitio web: Cove.test\n"
 		. "Correo de contacto: jjsotom2k4@gmail.com\n\n"
 		. "Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Los cambios entran en vigor inmediatamente después de su publicación en el sitio web.\n\n"
-		. "Última actualización: 20 de julio de 2026.",
+		. 'Última actualización: 20 de julio de 2026.',
 
-	'productos' => "Nos esforzamos por mostrar con la mayor precisión los colores y las imágenes de nuestros productos en la tienda. "
-		. "No podemos garantizar que la visualización de cualquier color en tu monitor sea exacta.",
+	'productos'    => 'Nos esforzamos por mostrar con la mayor precisión los colores y las imágenes de nuestros productos en la tienda. '
+		. 'No podemos garantizar que la visualización de cualquier color en tu monitor sea exacta.',
 
-	'precios' => "Todos los precios están sujetos a cambios sin previo aviso. "
-		. "Los precios mostrados incluyen IVA cuando corresponda.",
+	'precios'      => 'Todos los precios están sujetos a cambios sin previo aviso. '
+		. 'Los precios mostrados incluyen IVA cuando corresponda.',
 
-	'envios' => "El tiempo estimado de envío es de 3 a 5 días hábiles. "
-		. "Los tiempos de entrega son estimados y no podemos garantizar entregas en fechas específicas.",
+	'envios'       => 'El tiempo estimado de envío es de 3 a 5 días hábiles. '
+		. 'Los tiempos de entrega son estimados y no podemos garantizar entregas en fechas específicas.',
 
 	'devoluciones' => "POLÍTICA DE DEVOLUCIONES\n\n"
 		. "Aceptamos devoluciones dentro de los 14 días posteriores a la recepción del producto.\n\n"
 		. "CONDICIONES DEL PRODUCTO\n"
-		. "El producto debe devolverse en óptimas condiciones, sin rastros de haber sido utilizado, con las etiquetas originales; si ya las retiraste, introdúcelas en el empaque. "
+		. 'El producto debe devolverse en óptimas condiciones, sin rastros de haber sido utilizado, con las etiquetas originales; si ya las retiraste, introdúcelas en el empaque. '
 		. "Una vez recibido el producto en nuestra bodega verificamos sus condiciones y, según el resultado, te enviamos un producto nuevo o te entregamos un cupón para una nueva compra.\n\n"
 		. "PROCEDIMIENTO\n"
 		. "1. Devolución del dinero (solo en casos de garantía y ley de retracto):\n"
 		. "   - Por transferencia (cuenta de ahorros, cuenta corriente o ahorro a la mano): se realiza aproximadamente dentro de los 5 días hábiles siguientes a recibir el producto en nuestra bodega.\n"
 		. "   - Por reversión del pago: 15 días hábiles después de recibir el producto en nuestra bodega. La reversión corre por cuenta y orden de tu entidad bancaria; cualquier duda sobre ese plazo debes consultarla directamente con tu banco.\n"
-		. "2. Cambio del producto: sujeto a disponibilidad de inventario al momento del cambio. Solo se puede cambiar por productos de valor igual o inferior al original; la diferencia, si aplica, se entrega en un cupón para una nueva compra en la tienda online. "
+		. '2. Cambio del producto: sujeto a disponibilidad de inventario al momento del cambio. Solo se puede cambiar por productos de valor igual o inferior al original; la diferencia, si aplica, se entrega en un cupón para una nueva compra en la tienda online. '
 		. "Si no hay disponibilidad para el cambio, se entrega el valor del producto en un cupón.\n"
-		. "3. Cupón para una nueva compra: tiene validez de 6 meses desde su fecha de creación.",
+		. '3. Cupón para una nueva compra: tiene validez de 6 meses desde su fecha de creación.',
 
-	'privacidad' => "AVISO DE PRIVACIDAD\n\n"
+	'privacidad'   => "AVISO DE PRIVACIDAD\n\n"
 		. "Joan Soto, comercialmente conocido como Cove Outdoor, es el responsable del uso y protección de tus datos personales.\n\n"
 		. "FINALIDADES\n"
-		. "Los datos personales que recabamos los utilizamos para: respuesta a mensajes del formulario de contacto, prestación de cualquier servicio solicitado, y envío de productos adquiridos en esta tienda en línea. "
+		. 'Los datos personales que recabamos los utilizamos para: respuesta a mensajes del formulario de contacto, prestación de cualquier servicio solicitado, y envío de productos adquiridos en esta tienda en línea. '
 		. "Para esas finalidades podemos recabar tus datos de identificación y contacto.\n\n"
 		. "DATOS QUE RECABA EL SITIO WEB\n"
 		. "Nuestro sitio recaba automáticamente identificadores, nombre de usuario y contraseñas de sesión, y la región en la que se encuentra el usuario.\n\n"
 		. "DERECHOS ARCO\n"
-		. "Tienes derecho a conocer qué datos personales tenemos de ti, para qué los utilizamos y las condiciones del uso que les damos (Acceso); a solicitar la corrección de tu información cuando esté desactualizada, sea inexacta o incompleta (Rectificación); a que la eliminemos de nuestros registros o bases de datos cuando consideres que no está siendo utilizada adecuadamente (Cancelación); y a oponerte al uso de tus datos personales para fines específicos (Oposición). "
+		. 'Tienes derecho a conocer qué datos personales tenemos de ti, para qué los utilizamos y las condiciones del uso que les damos (Acceso); a solicitar la corrección de tu información cuando esté desactualizada, sea inexacta o incompleta (Rectificación); a que la eliminemos de nuestros registros o bases de datos cuando consideres que no está siendo utilizada adecuadamente (Cancelación); y a oponerte al uso de tus datos personales para fines específicos (Oposición). '
 		. "Estos derechos se conocen como derechos ARCO.\n"
 		. "Para ejercer cualquiera de los derechos ARCO debes presentar la solicitud a través del correo de contacto indicado abajo. La respuesta se atiende en un plazo máximo de 15 días hábiles.\n\n"
-		. "Última actualización: 20 de julio de 2026.",
+		. 'Última actualización: 20 de julio de 2026.',
 
-	'cupones' => "Los cupones de descuento se aplican en el campo de cupón que aparece en la página del carrito y en el checkout, antes de pagar.\n\n"
-		. "Si un cupón no se aplica, normalmente es por una de estas razones: ya venció, no se alcanzó la compra mínima requerida, ya se usó el número de veces permitido, o no aplica a los productos que están en el carrito. "
+	'cupones'      => "Los cupones de descuento se aplican en el campo de cupón que aparece en la página del carrito y en el checkout, antes de pagar.\n\n"
+		. 'Si un cupón no se aplica, normalmente es por una de estas razones: ya venció, no se alcanzó la compra mínima requerida, ya se usó el número de veces permitido, o no aplica a los productos que están en el carrito. '
 		. "El checkout muestra el motivo exacto en el momento de intentarlo.\n\n"
-		. "Los descuentos vigentes en productos ya se ven reflejados en el precio que muestra la tienda.",
+		. 'Los descuentos vigentes en productos ya se ven reflejados en el precio que muestra la tienda.',
 
-	'contacto' => "Correo electrónico: jjsotom2k4@gmail.com\n"
+	'contacto'     => "Correo electrónico: jjsotom2k4@gmail.com\n"
 		. "Sitio web: Cove.test\n\n"
-		. "Si tu consulta es sobre un pedido en curso, lo más rápido es que entres a tu cuenta en la tienda y revises el estado del pedido.",
+		. 'Si tu consulta es sobre un pedido en curso, lo más rápido es que entres a tu cuenta en la tienda y revises el estado del pedido.',
 );

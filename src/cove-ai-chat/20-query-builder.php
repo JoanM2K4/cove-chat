@@ -67,9 +67,9 @@ function cove_ai_attribute_map() {
 			'name'     => (string) $attr->attribute_name,
 			'label'    => (string) $attr->attribute_label,
 		);
-		$cache[ cove_ai_normaliza( $attr->attribute_name ) ] = $item;
+		$cache[ cove_ai_normaliza( $attr->attribute_name ) ]  = $item;
 		$cache[ cove_ai_normaliza( $attr->attribute_label ) ] = $item;
-		$cache[ cove_ai_normaliza( $taxonomy ) ] = $item;
+		$cache[ cove_ai_normaliza( $taxonomy ) ]              = $item;
 	}
 
 	return $cache;
@@ -200,7 +200,13 @@ function cove_ai_search_products( array $args, $session_id = '' ) {
 			$cat = get_term_by( 'name', $categoria, 'product_cat' );
 		}
 		if ( ! $cat ) {
-			$todas = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => true, 'number' => COVE_AI_TERMINOS_MAX ) );
+			$todas = get_terms(
+				array(
+					'taxonomy'   => 'product_cat',
+					'hide_empty' => true,
+					'number'     => COVE_AI_TERMINOS_MAX,
+				)
+			);
 			$lista = array();
 			if ( ! is_wp_error( $todas ) ) {
 				foreach ( $todas as $t ) {
@@ -380,9 +386,9 @@ function cove_ai_search_products( array $args, $session_id = '' ) {
 	if ( '' !== $termino && 0 === (int) $query->found_posts && function_exists( 'wc_get_product_id_by_sku' ) ) {
 		$por_sku = wc_get_product_id_by_sku( $termino );
 		if ( $por_sku ) {
-			$query_args['s']       = '';
+			$query_args['s']        = '';
 			$query_args['post__in'] = array( $por_sku );
-			$query = new WP_Query( $query_args );
+			$query                  = new WP_Query( $query_args );
 		}
 	}
 
@@ -558,7 +564,10 @@ function cove_ai_listar_categorias() {
 		)
 	);
 	if ( is_wp_error( $terms ) || empty( $terms ) ) {
-		return array( 'ok' => false, 'nota' => 'No hay categorías de producto con productos publicados.' );
+		return array(
+			'ok'   => false,
+			'nota' => 'No hay categorías de producto con productos publicados.',
+		);
 	}
 
 	$categorias = array();
@@ -570,11 +579,11 @@ function cove_ai_listar_categorias() {
 		);
 	}
 
-	$total = count( $categorias );
+	$total  = count( $categorias );
 	$salida = array(
-		'ok'              => true,
+		'ok'               => true,
 		'total_categorias' => $total,
-		'categorias'      => array_slice( $categorias, 0, COVE_AI_TERMINOS_MAX ),
+		'categorias'       => array_slice( $categorias, 0, COVE_AI_TERMINOS_MAX ),
 	);
 	if ( $total > COVE_AI_TERMINOS_MAX ) {
 		$salida['nota'] = 'Se listan las primeras ' . COVE_AI_TERMINOS_MAX . ' de ' . $total . ' categorías.';
@@ -594,7 +603,10 @@ function cove_ai_listar_categorias() {
 function cove_ai_listar_atributos( $atributo = '' ) {
 	$map = cove_ai_attribute_map();
 	if ( empty( $map ) ) {
-		return array( 'ok' => false, 'nota' => 'La tienda no tiene atributos globales, así que no hay filtros por atributo disponibles. Busca por texto libre.' );
+		return array(
+			'ok'   => false,
+			'nota' => 'La tienda no tiene atributos globales, así que no hay filtros por atributo disponibles. Busca por texto libre.',
+		);
 	}
 
 	$unicos = array();
@@ -610,8 +622,8 @@ function cove_ai_listar_atributos( $atributo = '' ) {
 				$lista[] = $item['label'];
 			}
 			return array(
-				'ok'    => false,
-				'nota'  => 'El atributo "' . $atributo . '" no es un atributo global filtrable.',
+				'ok'         => false,
+				'nota'       => 'El atributo "' . $atributo . '" no es un atributo global filtrable.',
 				'filtrables' => $lista,
 			);
 		}
@@ -646,8 +658,14 @@ function cove_ai_listar_atributos( $atributo = '' ) {
 	}
 
 	if ( empty( $salida ) ) {
-		return array( 'ok' => false, 'nota' => 'Ningún atributo tiene valores con productos publicados.' );
+		return array(
+			'ok'   => false,
+			'nota' => 'Ningún atributo tiene valores con productos publicados.',
+		);
 	}
 
-	return array( 'ok' => true, 'atributos' => $salida );
+	return array(
+		'ok'        => true,
+		'atributos' => $salida,
+	);
 }

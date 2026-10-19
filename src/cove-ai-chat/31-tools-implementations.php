@@ -97,7 +97,7 @@ function cove_ai_siguiente_bloque( $session_id ) {
 
 	if ( ! $state ) {
 		return array(
-			'ok'   => false,
+			'ok'    => false,
 			'error' => 'No hay una búsqueda anterior registrada en esta conversación. En vez de adivinar, pregúntale al cliente a qué lista se refiere, o haz una búsqueda nueva.',
 		);
 	}
@@ -169,23 +169,31 @@ function cove_ai_politicas_tienda( $seccion = '' ) {
 			$indice[] = $clave;
 		}
 		return array(
-			'ok'       => true,
+			'ok'        => true,
 			'secciones' => $indice,
-			'nota'     => 'Llama de nuevo con el parámetro "seccion" para leer el contenido completo.',
+			'nota'      => 'Llama de nuevo con el parámetro "seccion" para leer el contenido completo.',
 		);
 	}
 
 	$buscado = cove_ai_normaliza( $seccion );
 	foreach ( $info as $clave => $bloque ) {
 		if ( cove_ai_normaliza( $clave ) === $buscado ) {
-			return array( 'ok' => true, 'seccion' => $clave, 'contenido' => (string) $bloque );
+			return array(
+				'ok'        => true,
+				'seccion'   => $clave,
+				'contenido' => (string) $bloque,
+			);
 		}
 	}
 	// Coincidencia parcial, para que "envíos" encuentre "envios_nacionales".
 	foreach ( $info as $clave => $bloque ) {
 		$clave_n = cove_ai_normaliza( $clave );
 		if ( false !== strpos( $clave_n, $buscado ) || false !== strpos( $buscado, $clave_n ) ) {
-			return array( 'ok' => true, 'seccion' => $clave, 'contenido' => (string) $bloque );
+			return array(
+				'ok'        => true,
+				'seccion'   => $clave,
+				'contenido' => (string) $bloque,
+			);
 		}
 	}
 
@@ -194,10 +202,10 @@ function cove_ai_politicas_tienda( $seccion = '' ) {
 		$indice[] = $clave;
 	}
 	return array(
-		'ok'       => false,
-		'error'    => 'No existe la sección "' . $seccion . '".',
+		'ok'        => false,
+		'error'     => 'No existe la sección "' . $seccion . '".',
 		'secciones' => $indice,
-		'nota'     => 'Puedes llamar de nuevo con una de estas secciones, o responder con lo que tengas de las otras.',
+		'nota'      => 'Puedes llamar de nuevo con una de estas secciones, o responder con lo que tengas de las otras.',
 	);
 }
 
@@ -213,13 +221,16 @@ function cove_ai_politicas_tienda( $seccion = '' ) {
  */
 function cove_ai_mis_pedidos() {
 	if ( ! function_exists( 'wc_get_orders' ) ) {
-		return array( 'ok' => false, 'error' => 'WooCommerce no está activo en este sitio.' );
+		return array(
+			'ok'    => false,
+			'error' => 'WooCommerce no está activo en este sitio.',
+		);
 	}
 
 	$user_id = get_current_user_id();
 	if ( ! $user_id ) {
 		return array(
-			'ok'   => false,
+			'ok'    => false,
 			'error' => 'El cliente no tiene sesión iniciada, así que no hay pedidos que consultar. Dile con amabilidad que entre a su cuenta (o use el enlace de Mi cuenta del sitio) para que puedas verlos. No intentes adivinar ni buscar pedidos por correo o número.',
 		);
 	}
@@ -237,10 +248,10 @@ function cove_ai_mis_pedidos() {
 
 	if ( empty( $pedidos ) ) {
 		return array(
-			'ok'                  => true,
+			'ok'                    => true,
 			'total_pedidos_cliente' => $total_cliente,
-			'pedidos'             => array(),
-			'nota'                => 'Este cliente no tiene pedidos todavía.',
+			'pedidos'               => array(),
+			'nota'                  => 'Este cliente no tiene pedidos todavía.',
 		);
 	}
 
@@ -432,7 +443,10 @@ function cove_ai_cupon_resumen( $codigo ) {
 function cove_ai_cupones( $codigo = '' ) {
 
 	if ( ! class_exists( 'WC_Coupon' ) ) {
-		return array( 'ok' => false, 'error' => 'WooCommerce no está activo en este sitio.' );
+		return array(
+			'ok'    => false,
+			'error' => 'WooCommerce no está activo en este sitio.',
+		);
 	}
 
 	$publicos = cove_ai_cupones_publicos();
@@ -460,13 +474,16 @@ function cove_ai_cupones( $codigo = '' ) {
 
 		if ( empty( $vigentes ) ) {
 			return array(
-				'ok'    => true,
+				'ok'      => true,
 				'cupones' => array(),
-				'nota'  => 'Ninguno de los cupones publicados está vigente ahora mismo (vencidos o agotados). Comunícalo tal cual: actualmente no hay cupones vigentes.',
+				'nota'    => 'Ninguno de los cupones publicados está vigente ahora mismo (vencidos o agotados). Comunícalo tal cual: actualmente no hay cupones vigentes.',
 			);
 		}
 
-		return array( 'ok' => true, 'cupones' => $vigentes );
+		return array(
+			'ok'      => true,
+			'cupones' => $vigentes,
+		);
 	}
 
 	/* --------------------------------------------------------------------- */
@@ -486,7 +503,11 @@ function cove_ai_cupones( $codigo = '' ) {
 					'nota'    => 'Ese cupón ya venció o se agotó.',
 				);
 			}
-			return array( 'ok' => true, 'vigente' => true, 'cupon' => $resumen );
+			return array(
+				'ok'      => true,
+				'vigente' => true,
+				'cupon'   => $resumen,
+			);
 		}
 	}
 
