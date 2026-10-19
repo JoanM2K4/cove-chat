@@ -199,8 +199,9 @@ Cómo lo resuelve el plugin (`40-deepseek.php`):
 | Marcado **incompleto** | **No se ejecuta nada.** Se limpia y el cliente recibe una invitación a reformular. Fallar cerrado es mejor que ejecutar una herramienta con argumentos inventados |
 | Cualquier caso | El marcado se elimina antes de responder: el cliente nunca lo ve |
 
-Además, cada recuperación queda en el log del servidor (`error_log`) para poder
-medir con qué frecuencia ocurre.
+Además, cada recuperación emite el evento `cove_ai_dsml_recuperado` (ver 6.5),
+así que quien quiera medir con qué frecuencia ocurre solo tiene que engancharse
+a él.
 
 **Trampa de implementación que costó una iteración:** las expresiones regulares
 de este archivo llevan el modificador `/u` y la barra de ancho completo se
@@ -211,6 +212,39 @@ texto exacto que devolvió el proveedor, y quedó como prueba de regresión en
 `lab-te2-02-soporte/test-dsml.php`.
 
 ---
+
+#### 6.5 Registro: tres eventos, ningún `error_log`
+
+El plugin **no escribe en el log por su cuenta**. `error_log()` es una función de
+desarrollo que WordPress Coding Standards marca
+(`WordPress.PHP.DevelopmentFunctions`), y un plugin de tienda no debería decidir
+dónde van los registros del sitio: eso es cosa del tema o de quien administra.
+
+En su lugar emite tres eventos. Para activarlos, en el tema hijo o en otro
+plugin:
+
+```php
+add_action( 'cove_ai_dsml_recuperado', function ( $cantidad ) {
+	error_log( '[Cove AI] Recuperadas ' . $cantidad . ' llamada(s) DSML.' );
+} );
+
+add_action( 'cove_ai_error', function ( $codigo, $mensaje ) {
+	error_log( '[Cove AI] ' . $codigo . ': ' . $mensaje );
+} );
+
+add_action( 'cove_ai_sin_api_key', function () {
+	error_log( '[Cove AI] Falta DEEPSEEK_API_KEY en wp-config.php.' );
+} );
+```
+
+| Evento | Cuándo se dispara | Argumentos |
+|---|---|---|
+| `cove_ai_dsml_recuperado` | El proveedor devolvió herramientas como texto y se recuperaron | cantidad de llamadas |
+| `cove_ai_error` | Fallo de la API o del ciclo de herramientas | código y mensaje del `WP_Error` |
+| `cove_ai_sin_api_key` | Alguien usa el chat y falta la constante | — |
+
+Ventaja doble: el plugin deja de tener opinión sobre el registro, y el linter
+queda en cero violaciones sin necesidad de excepciones.
 
 ## 7. Por dónde empezar a leer el código
 

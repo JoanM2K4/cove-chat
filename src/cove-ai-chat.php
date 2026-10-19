@@ -39,13 +39,14 @@ require_once COVE_AI_DIR . '/60-widget.php';              // Embed del component
  * Aviso temprano si falta la API key.
  *
  * No se aborta nada: el chat responde "no configurado" y el resto del sitio
- * sigue funcionando. Pero es útil verlo en el log del primer intento.
+ * sigue funcionando. Se emite un evento, sin escribir en el log por cuenta
+ * propia: ver el apartado de registro en docs/ARQUITECTURA.md.
  */
 add_action(
 	'init',
 	function () {
-		if ( '' === cove_ai_key() && defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			error_log( '[Cove AI] Falta la API key. Agrega DEEPSEEK_API_KEY en wp-config.php (ver docs/CONFIGURACION.md).' );
+		if ( '' === cove_ai_key() ) {
+			do_action( 'cove_ai_sin_api_key' );
 		}
 	}
 );

@@ -336,7 +336,7 @@ function cove_ai_converse( array $messages, $session_id = '' ) {
 					'content'    => null,
 					'tool_calls' => $tool_calls,
 				);
-				error_log( '[Cove AI] Recuperadas ' . count( $tool_calls ) . ' llamada(s) a herramienta que DeepSeek dejó en texto plano (DSML).' );
+				do_action( 'cove_ai_dsml_recuperado', count( $tool_calls ) );
 			} else {
 				return array(
 					// Se limpia el marcado por si quedó un envoltorio que no se

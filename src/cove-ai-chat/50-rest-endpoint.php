@@ -137,9 +137,10 @@ function cove_ai_rest_chat( WP_REST_Request $request ) {
 			return new WP_REST_Response( array( 'text' => $resultado->get_error_message() ), 200 );
 		}
 
-		// Cualquier otro fallo: se registra para poder depurar y al visitante
-		// se le da un mensaje humano, sin detalles técnicos.
-		error_log( '[Cove AI] ' . $resultado->get_error_code() . ' — ' . $resultado->get_error_message() );
+		// Cualquier otro fallo: se emite un evento para que quien administre lo
+		// registre si quiere, y al visitante se le da un mensaje humano, sin
+		// detalles técnicos.
+		do_action( 'cove_ai_error', $resultado->get_error_code(), $resultado->get_error_message() );
 
 		return new WP_REST_Response(
 			array( 'text' => 'No pude completar la consulta. ¿Puedes reformular tu pregunta?' ),
